@@ -1,0 +1,15 @@
+Cum rulezi din terminal 
+Doar Problema 1
+python main.py --problem 1 --csv coupled_damped_oscillators.csv
+
+Doar Problema 2
+python main.py --problem 2
+
+Ambele
+python main.py --problem both
+
+Cu salvare de grafice
+python main.py --problem both --save-plots
+
+Schimbi parametrii DE rapid
+python main.py --problem 2 --NP 60 --G 250 --F 0.7 --CR 0.9
