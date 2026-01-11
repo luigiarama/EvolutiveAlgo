@@ -6,12 +6,16 @@ import matplotlib.pyplot as plt
 from model import differential_evolution, model, mse_fitness
 from problem2 import pid_fitness, simulate_mass_spring_damper_pid
 
-
+"""
+Apelarea primei probleme
+"""
 def run_problem1(csv_path, NP, G, F, CR, seed, save_plots=False):
+    #citim datele din fisierul CSV
     df = pd.read_csv(csv_path)
     t = df["time"].to_numpy()
     y = df["x1"].to_numpy()
 
+    #calculam limite automate pentru parametri pe baza datelor citite
     y_max = np.max(np.abs(y))
     y_min = np.min(y)
     y_max_val = np.max(y)
@@ -25,14 +29,14 @@ def run_problem1(csv_path, NP, G, F, CR, seed, save_plots=False):
     ]
 
     fitness_fn = lambda theta: mse_fitness(theta, t, y)
-
+    #Apelam algoritmul DE
     best_theta, best_mse, hist = differential_evolution(
         fitness_fn=fitness_fn,
         bounds=bounds,
         NP=NP, G=G, F=F, CR=CR,
         seed=seed
     )
-
+    # Vizualizarea rezultatelor (Grafice)
     print("=== Problema 1 ===")
     print("Best parameters:", best_theta)
     print("Best MSE:", best_mse)
